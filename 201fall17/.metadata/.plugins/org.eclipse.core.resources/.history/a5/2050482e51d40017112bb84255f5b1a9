@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+
+public class PrefixCode {
+	public String isOne(String[] words) {
+		ArrayList<String> myWords = new ArrayList<String>();
+		ArrayList<String> sorter = new ArrayList<String>();
+		for (String a : words) {
+			myWords.add(a);
+			sorter.add(a);
+		}
+
+	}
+}

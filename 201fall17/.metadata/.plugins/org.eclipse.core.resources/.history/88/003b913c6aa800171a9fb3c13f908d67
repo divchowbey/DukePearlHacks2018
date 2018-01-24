@@ -1,0 +1,11 @@
+
+	public class App {
+		public static void main (String [] args) {
+			int [] a= {1,2,3,4};
+			int []b = a;
+			b[1] = 7;
+			System.out.print(a[1]);
+		}
+
+	}
+

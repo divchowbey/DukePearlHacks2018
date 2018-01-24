@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class PrefixCode {
+	public String isOne(String[] words) {
+		ArrayList<String> myWords = new ArrayList<String>();
+		ArrayList<String> sorter = new ArrayList<String>();
+		for (String a : words) {
+			myWords.add(a);
+			sorter.add(a);
+		}
+		Comparator<String> comp = new Comparator<String>() {
+			@Override
+
+			public int compare(String v, String w) {
+				return w.length() - v.length();
+			}
+		};
+		Collections.sort(sorter, comp);
+		for (int i = 0; i < sorter.size() - 1; i++) {
+			for (int k = 1; k < sorter.size(); k++) {
+				if (k != i) {
+					if (isPrefixOf(sorter.get(k), sorter.get(i))) {
+						return "No, " + myWords.indexOf(sorter.get(k));
+					}
+				}
+			}
+		}
+		return "Yes";
+	}
+
+	public boolean isPrefixOf(String pre, String word) {
+		if (pre.length() > word.length()) {
+			return false;
+		}
+		if (word.substring(0, pre.length()).equals(pre)) {
+			return true;
+		}
+		return false;
+	}
+}

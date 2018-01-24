@@ -1,0 +1,13 @@
+
+public class App {
+	public static void main(String[]args) {
+	EfficientWordMarkov myMark = new EfficientWordMarkov(3);
+	String g = "there is a new store down the street";
+	String [] a = g.split("\\s+");
+	WordGram mine = new WordGram(a, 0, 8); 
+	myMark.setTraining(g);
+	System.out.println(myMark.myMap);
+   
+			
+	}
+}

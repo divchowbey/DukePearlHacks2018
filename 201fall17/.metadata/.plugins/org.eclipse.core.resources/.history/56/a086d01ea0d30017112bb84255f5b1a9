@@ -1,0 +1,15 @@
+public class OlympicCandles {
+	public int numberOfNights(int[] candles) {
+
+		int sum = 0;
+		for (int a : candles) {
+			sum = sum + a;
+		}
+		int days = 1;
+		while (sum >= 0) {
+			sum = sum - days;
+			days++;
+		}
+		return days;
+	}
+}

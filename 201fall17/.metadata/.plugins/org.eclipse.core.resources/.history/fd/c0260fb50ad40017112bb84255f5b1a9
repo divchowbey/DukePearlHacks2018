@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class SortByFreqs {
+	public String[] sort(String[] data) {
+
+		ArrayList<String> allVals = new ArrayList<String>();
+		for (String c : allVals) {
+			allVals.add(c);
+		}
+
+		// fill in code here
+		ArrayList<String> mine = new ArrayList<String>();
+		for (String a : data) {
+			if (!mine.contains(a)) {
+				mine.add(a);
+			}
+		}
+
+		Collections.sort(mine, new Comparator<String>() {
+			@Override
+
+			public int compare(String v, String w) {
+				if (Collections.frequency(allVals, v) > Collections.frequency(allVals, w)) {
+					return Collections.frequency(allVals, v) - Collections.frequency(allVals, w);
+				}
+				if (Collections.frequency(allVals, v) < Collections.frequency(allVals, w)) {
+					return Collections.frequency(allVals, w) - Collections.frequency(allVals, v);
+				}
+				//if (Collections.frequency(allVals, v) == Collections.frequency(allVals, w)) {
+				//	return v.compareTo(w);
+				//}
+				return 0;
+			}
+		});
+		String[] ret = new String[mine.size()];
+		int i = 0;
+		for (String a : mine) {
+			ret[i] = a;
+			i++;
+		}
+		return ret;
+
+	}
+}

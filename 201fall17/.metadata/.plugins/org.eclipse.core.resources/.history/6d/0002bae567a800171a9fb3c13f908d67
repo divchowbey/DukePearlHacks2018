@@ -1,0 +1,10 @@
+
+	public class App {
+		public static void main (String [] args) {
+			DNAMaxNucleotide myNuc = new DNAMaxNucleotide(); 
+			String [] a = {"agt", "aagt", "ccatg", "taattt"};
+			System.out.println(myNuc.max(a, "g")); 
+		}
+
+	}
+

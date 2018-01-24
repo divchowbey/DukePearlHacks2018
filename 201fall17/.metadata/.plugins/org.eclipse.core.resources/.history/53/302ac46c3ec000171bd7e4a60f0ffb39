@@ -1,0 +1,110 @@
+
+public class LinkStrand implements IDnaStrand {
+	private class Node {
+		String info;
+		Node next;
+
+		public Node(String s) {
+			info = s;
+			next = null;
+		}
+	}
+
+	private Node myFirst, myLast;
+	private long mySize;
+	private int myAppends;
+
+	public LinkStrand() {
+		this("");
+	}
+
+	public LinkStrand(String a) {
+		initialize(a);
+	}
+
+	@Override
+	public long size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void initialize(String source) {
+		Node myNode = new Node(source);
+		myFirst = myNode;
+		myLast = myNode;
+		myAppends = 0;
+
+	}
+
+	@Override
+	public IDnaStrand getInstance(String source) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IDnaStrand append(String dna) {
+		Node myNode = new Node(dna);
+		this.myFirst.next = myNode;
+		this.myLast = myNode;
+		myAppends += 1;
+		mySize += dna.length();
+		return this;
+	}
+
+	@Override
+	public IDnaStrand reverse() {
+		LinkStrand rev = new LinkStrand(this.myLast.info);
+		Node parse = this.myFirst;
+		Node myNode = this.myFirst;
+
+		while (myNode.next != null) {
+			while (parse.next.next != null) {
+				parse = parse.next;
+			}
+			parse.next = null;
+			rev.append(parse.info);
+			parse = this.myFirst;
+		}
+		rev.append(this.myFirst.info);
+		Node iter = rev.myFirst;
+		while (iter != null) {
+			iter = iter.next;
+		}
+		rev.myLast = iter;
+		return rev;
+
+	}
+
+	@Override
+	public int getAppendCount() {
+		return myAppends;
+	}
+
+	@Override
+	public char charAt(int index) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String toString() {
+		Node a = myFirst;
+		StringBuilder ret = new StringBuilder();
+		while (a != null) {
+			ret.append(a.info);
+			a = a.next;
+		}
+		return ret.toString();
+	}
+
+	public static void main(String[] args) {
+		LinkStrand mine = new LinkStrand("a");
+		mine.append("b");
+		mine.append("c");
+		mine.append("d");
+		System.out.println(mine);
+
+	}
+
+}
