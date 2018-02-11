@@ -2,6 +2,8 @@
 module.exports = function (app) {
     var todoList = require('../controllers/controller');
     var LINQ = require("node-linq").LINQ;
+    const cheerio = require('cheerio');
+    const syncrequest = require('sync-request');
 
     app.get('/getCountryData', (req, res) => {
         // 
@@ -21,14 +23,50 @@ module.exports = function (app) {
         request(options, function (error, response, body) {
             if (error) throw new Error(error);
 
-            console.log(body);
+            // console.log(body);
             let countryData = JSON.parse(body); //creates array of objects
             var arr = new LINQ(countryData)//.OrdersBy(function(country) {return country.joined;})
-            .Where(function(country) {return country.country == "United States"})
-            .OrderBy(function(country) {return country.rank})
-            .ToArray();
+                .Where(function (country) { return country.country == "United States" })
+                .OrderBy(function (country) { return country.rank })
+                .ToArray();
+            arr = arr.slice(0, 10); //get first 10
+            for (let countryOI of arr) {
+                if(countryOI.uri && countryOI.uri!=""){
+                let URL = "https://www.inhersight.com/company/" + countryOI.uri;
+                var filePart = syncrequest('GET', URL);
+                console.log(URL);
+                // console.log("Data ", filePart.getBody('utf8').toString());
+                try{
+                let fileData = filePart.getBody('utf8').toString();
+                let companyRatingHTML = cheerio.load(fileData);
+                // let indexesToCrawl = ["0","3","6",""];
+                for(let i =0;i<43;i+=3){
+                    let companyRatingHTMLKEY = companyRatingHTML('#ratings .frame-950 .clearfix .col').eq(i)
+                    // .eq(i+1)
+                    .html().toString().trim();//.length;
+                    let companyRatingHTMLVal = companyRatingHTML('#ratings .frame-950 .clearfix .col').eq(i+1)
+                    // .eq(i+1)
+                    .html().toString().trim();//.length;
+                    countryOI[companyRatingHTMLKEY.toLowerCase().replaceAll(" ","_")]=companyRatingHTMLVal;
+                    // console.log(companyRatingHTMLI);
+                }
+                
+
+                } catch (e){
+                    console.error("Err : ",e)
+                    //toLowerCase()
+                    //.replaceAll()
+                }
+                }
+            }
             res.send(arr);
         });
 
     });
 };
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+

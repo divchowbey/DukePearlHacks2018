@@ -1,9 +1,0 @@
-
-public class App {
-	public static void main(String[] args) {
-		SortByFreqs myTest = new SortByFreqs();
-		String[] a = { "app", "ban", "app", "dog" };
-		myTest.sort(a);
-	}
-
-}

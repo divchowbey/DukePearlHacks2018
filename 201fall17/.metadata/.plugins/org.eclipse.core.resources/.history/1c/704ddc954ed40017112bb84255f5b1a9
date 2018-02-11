@@ -1,9 +1,0 @@
-
-public class App {
-	public static void main(String[] args) {
-		OlympicCandles myTest = new OlympicCandles();
-		int[] a = { 5, 2, 2, 1 };
-		System.out.println(myTest.numberOfNights(a));
-	}
-
-}
