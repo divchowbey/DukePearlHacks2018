@@ -4,6 +4,7 @@ module.exports = function (app) {
     var LINQ = require("node-linq").LINQ;
     const cheerio = require('cheerio');
     const syncrequest = require('sync-request');
+    app.get('/', (req, res) =>{res.render("index");} );
 
     app.get('/getCountryData', (req, res) => {
         // 
