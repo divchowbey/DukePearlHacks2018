@@ -1,0 +1,22 @@
+{
+  "name": "pearlhacks2018",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "swathi.ramprasad@duke.edu",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.14.12"
+  },
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.4",
+    "path": "^0.12.7",
+    "request": "^2.83.0"
+  }
+}
